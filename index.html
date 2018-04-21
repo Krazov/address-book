@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Address book</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,700italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./app/main.js" type="module" defer></script>
+</head>
+
+<body>
+    <div class="main">
+        <h1>Address book</h1>
+
+        <ul class="list"></ul>
+    </div>
+
+    <div class="dialog">
+        <form class="form">
+            <p>
+                <label for="name">Name:</label>
+                <input type="text" id="name">
+            </p>
+            <p>
+                <label for="surname">Surname:</label>
+                <input type="text" id="surname">
+            </p>
+            <p>
+                <label for="email">Email:</label>
+                <input type="email" id="email">
+            </p>
+            <p>
+                <input type="submit" value="Save">
+            </p>
+        </form>
+    </div>
+</body>
+
+</html>
