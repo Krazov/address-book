@@ -1,15 +1,31 @@
-let subscribers = [];
+import { hasProp } from '/app/utils/fp.util.js';
 
-export const subscribe = (fn) => {
-    subscribers.push(fn);
+const subscribers = {};
+
+export const subscribe = (channel, fn) => {
+    if (!channelExists(channel)) {
+        subscribers[channel] = [];
+    }
+
+    if (typeof fn == 'function') {
+        subscribers[channel].push(fn);
+   }
 };
 
-export const unsubscribe = (fn) => {
-    subscribers.splice(subscribers.indexOf(fn), 1);
+export const unsubscribe = (channel, fn) => {
+    if (channelExists(channel)) {
+        subscribers.splice(subscribers.indexOf(fn), 1);
+    }
 };
 
-export const notify = (message) => {
-    subscribers.forEach((fn) => {
-        fn(message);
-    })
+export const notify = (channel, message) => {
+    if (channelExists(channel)) {
+        subscribers[channel].forEach((fn) => {
+            fn(message);
+        })
+    }
 };
+
+function channelExists(channel) {
+    return hasProp(subscribers, channel);
+}

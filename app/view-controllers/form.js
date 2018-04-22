@@ -16,7 +16,7 @@ const clearForm = () => {
 form.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    notify({
+    notify('new-contact', {
         name: name.value,
         surname: surname.value,
         email: email.value,
