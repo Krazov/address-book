@@ -14,7 +14,7 @@ export const subscribe = (channel, fn) => {
 
 export const unsubscribe = (channel, fn) => {
     if (channelExists(channel)) {
-        subscribers.splice(subscribers.indexOf(fn), 1);
+        subscribers[channel].splice(subscribers.indexOf(fn), 1);
     }
 };
 

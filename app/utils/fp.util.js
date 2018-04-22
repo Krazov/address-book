@@ -1,8 +1,12 @@
 export const compose =
-    (...functions) => (initial) =>
-        functions.reduceRight(
-            (value, fn) => fn(value),
+    (...functions) => (...initial) => {
+        const lastIndex = functions.length - 1;
+
+        return functions.reduceRight(
+            (value, fn, index) => index === lastIndex ? fn(...value) : fn(value),
             initial
         );
+    };
 
-export const hasProp = (object, prop) => object.hasOwnProperty(prop);
+export const hasProp =
+    (object, prop) => object.hasOwnProperty(prop);

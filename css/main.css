@@ -1,3 +1,13 @@
 body {
     font-family: 'Open Sans', Calibri, sans-serif;
 }
+
+.input {
+
+}
+.error {
+    display: none;
+}
+.field.has-error .error {
+    display: block;
+}

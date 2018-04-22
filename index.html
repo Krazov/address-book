@@ -19,21 +19,24 @@
 
     <div class="dialog">
         <form class="form">
-            <p>
+            <div class="field name-container">
                 <label for="name">Name:</label>
-                <input type="text" id="name">
-            </p>
-            <p>
+                <input type="text" id="name" class="input name">
+                <div class="error">Invalid name</div>
+            </div>
+            <div class="field surname-container">
                 <label for="surname">Surname:</label>
-                <input type="text" id="surname">
-            </p>
-            <p>
+                <input type="text" id="surname" class="input surname">
+                <div class="error">Invalid surname</div>
+            </div>
+            <div class="field email-container">
                 <label for="email">Email:</label>
-                <input type="email" id="email">
-            </p>
-            <p>
+                <input type="email" id="email" class="input email">
+                <div class="error">Invalid email</div>
+            </div>
+            <div>
                 <input type="submit" value="Save">
-            </p>
+            </div>
         </form>
     </div>
 </body>
