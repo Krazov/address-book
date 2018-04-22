@@ -1,0 +1,33 @@
+{
+  "name": "address-book",
+  "version": "1.0.0",
+  "description": "Address book, with data local to the browser",
+  "main": "app/main.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "jest": "^22.4.3"
+  },
+  "devDependencies": {
+    "babel-jest": "^22.4.3",
+    "babel-preset-env": "^1.6.1"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Krazov/address-book.git"
+  },
+  "keywords": [
+    "address book",
+    "vanilla js"
+  ],
+  "author": "Jon Krazov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Krazov/address-book/issues"
+  },
+  "homepage": "https://github.com/Krazov/address-book#readme"
+}
