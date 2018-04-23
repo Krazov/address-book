@@ -3,36 +3,37 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-//        uglify: {
-//            options: {
-//                banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
-//            },
-//            dist: {
-//                files: {
-//                    'bundled/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
-//                }
-//            }
-//        },
+
         browserify: {
-            dist: {
+            bundle: {
                 files: {
-                    // destination for transpiled js : source js
                     'bundled/app.js': 'app/main.js'
                 },
                 options: {
                     transform: [['babelify', {
-                        presets: 'es2015'
+                        presets: 'env'
                     }]],
                     browserifyOptions: {
                         debug: true
                     }
                 }
             }
-        }
+        },
+
+        uglify: {
+            options: {
+                banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+            },
+            dist: {
+                files: {
+                    'bundled/app.min.js': 'bundled/app.js'
+                }
+            }
+        },
     });
 
     grunt.registerTask('default', [
-        'browserify:dist'
-//        'uglify',
+        'browserify:bundle',
+        'uglify',
     ]);
 };
