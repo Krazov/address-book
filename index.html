@@ -17,7 +17,9 @@
         <ul class="list"></ul>
     </div>
 
-    <div class="dialog is-active">
+    <div class="dialog dialog-manage">
+        <div class="dialog-title">Manage contact</div>
+
         <form class="form">
             <input type="hidden" class="id" value="">
 
@@ -41,6 +43,23 @@
 
             <div>
                 <input type="submit" value="Save">
+            </div>
+        </form>
+    </div>
+
+    <div class="dialog dialog-delete">
+        <div class="dialog-title">Removing contact</div>
+
+        <form class="form">
+            <input type="hidden" class="id" value="">
+
+            <div class="question">Do you want to remove this contact?</div>
+
+            <div class="contact-details"></div>
+
+            <div class="options">
+                <button class="form-anwer form-yes">Yes, remove it</button>
+                <button class="form-anwer form-no">Cancel</button>
             </div>
         </form>
     </div>

@@ -7,7 +7,7 @@ import { notify, subscribe as observeMessages } from '/app/helpers/message-bus.h
 import { compose } from '/app/utils/fp.util.js';
 
 // main element
-const $dialog = document.querySelector('.dialog');
+const $dialog = document.querySelector('.dialog-manage');
 const $form = $dialog.querySelector('.form');
 
 // containers
@@ -38,7 +38,6 @@ const closeForm = () => {
 
 const validateForm =
       (name, surname, email) => ({
-          id: true,
           name: validateName(name),
           surname: validateSurname(surname),
           email: validateEmail(email),
@@ -73,7 +72,7 @@ $form.addEventListener('submit', (event) => {
     }
 
     closeForm();
-}, { passive: false });
+});
 
 observeMessages(EDIT_CONTACT, ({ id, name, surname, email }) => {
     $id.value = id;

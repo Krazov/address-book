@@ -2,6 +2,7 @@ import {
     INIT_LIST,
     ADD_TO_LIST,
     UPDATE_LIST,
+    REMOVE_FROM_LIST,
     UPDATE_REQUEST,
     DELETE_REQUEST,
 } from '/app/constants/channels.js';
@@ -31,27 +32,14 @@ const addSingleItem = ({id, name, surname, email}) => {
 }
 
 const updateItem = (id) => {
-    notify(UPDATE_REQUEST, id);
+    notify(UPDATE_REQUEST, { id });
 };
 
-const deleteItem = () => {
-    console.log('To the delete!');
+const deleteItem = (id) => {
+    notify(DELETE_REQUEST, { id });
 };
 
-// action
-$list.addEventListener('click', (event) => {
-    const data = event.target.dataset;
-
-    switch (data.type) {
-    case 'edit':
-        updateItem(data.id);
-        break;
-    case 'delete':
-        deleteItem(data.id);
-        break;
-    }
-});
-
+// message bus
 observeMessages(INIT_LIST, (addressBook) => {
     Object
         .values(addressBook)
@@ -64,4 +52,21 @@ observeMessages(UPDATE_LIST, ({id, name, surname, email }) => {
     items[id].querySelector('.item-label').textContent = itemText({ name, surname, email });
 });
 
-observeMessages('remove-from-list', () => {});
+observeMessages(REMOVE_FROM_LIST, ({ id }) => {
+    $list.removeChild(items[id]);
+    delete items[id];
+});
+
+// user interaction
+$list.addEventListener('click', (event) => {
+    const { action, contactId } = event.target.customData;
+
+    switch (action) {
+    case 'edit':
+        updateItem(contactId);
+        break;
+    case 'delete':
+        deleteItem(contactId);
+        break;
+    }
+});

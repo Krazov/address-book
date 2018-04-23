@@ -9,10 +9,13 @@ const createLabel = (name, surname, country, email) =>
 const createButton = (className, textContent, type, id) => {
     const $button = document.createElement('button');
 
+    $button.customData = {
+        contactId: id,
+        action: type,
+    };
+
     $button.className = className;
     $button.textContent = textContent;
-    $button.dataset.type = type;
-    $button.dataset.id = id;
 
     return $button;
 };
