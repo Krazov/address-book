@@ -14,6 +14,8 @@ import {
 
 import { notify, subscribe as observeMessages } from '../helpers/message-bus.helper.js';
 import { compose } from '../utils/fp.util.js';
+import createOption from '../utils/dom.option.util.js';
+import countryList from '../utils/country-list.util.js';
 
 // main element
 const $dialog = document.querySelector('.dialog-manage');
@@ -22,13 +24,14 @@ const $form = $dialog.querySelector('.form');
 // containers
 const $nameContainer = $form.querySelector('.name-container');
 const $surnameContainer = $form.querySelector('.surname-container');
+const $countryContainer = $form.querySelector('.country-container');
 const $emailContainer = $form.querySelector('.email-container');
 
 // inputs
 const $id = $form.querySelector('.id');
 const $name = $nameContainer.querySelector('.name');
 const $surname = $surnameContainer.querySelector('.surname');
-//const country = document.getElementById('country');
+const $country = $countryContainer.querySelector('.country');
 const $email = $emailContainer.querySelector('.email');
 
 const $cancel = $form.querySelector('.cancel');
@@ -39,6 +42,13 @@ const toggleDialog = (status) => () => {
 };
 const showDialog = toggleDialog(true);
 const hideDialog = toggleDialog(false);
+
+const fillFormFields = ({ id, name, surname, email }) => {
+    $id.value = id;
+    $name.value = name;
+    $surname.value = surname;
+    $email.value = email;
+};
 
 const getValues = () => ({
     id: $id.value,
@@ -71,17 +81,25 @@ const checkValidity = (report) => Object.values(report).every((field) => field =
 
 const allGood = compose(checkValidity, markErrors, validateForm);
 
+// on load
+{
+    const countries = countryList.getCodeList();
+
+    Object
+        .keys(countries)
+        .map((code) => createOption(code, countries[code]))
+        .forEach(($option) => {
+            $country.appendChild($option);
+        })
+}
+
 // message bus
 observeMessages(NEW_REQUEST, () => {
     showDialog();
 });
 
 observeMessages(EDIT_CONTACT, ({ id, name, surname, email }) => {
-    $id.value = id;
-    $name.value = name;
-    $surname.value = surname;
-    $email.value = email;
-
+    fillFormFields({ id, name, surname, email });
     showDialog();
 });
 

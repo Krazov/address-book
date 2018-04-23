@@ -12,7 +12,6 @@ import { notify, subscribe as observeMessages } from '../helpers/message-bus.hel
 import { compose } from '../utils/fp.util.js';
 import { itemText } from '../utils/text.util.js';
 import { createItem } from '../utils/dom.item.util.js';
-import countryList from '../utils/country-list.util.js';
 
 // module data
 const items = {};
