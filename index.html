@@ -15,7 +15,12 @@
     <div class="main">
         <h1>Address book</h1>
 
-        <ul class="list"></ul>
+        <div class="contacts">
+            <div class="contacts-buttons">
+                <button class="contacts-button new">New contact</button>
+            </div>
+            <ul class="contacts-list"></ul>
+        </div>
     </div>
 
     <div class="dialog dialog-manage">
@@ -36,6 +41,14 @@
                 <div class="error">Invalid surname</div>
             </div>
 
+            <div class="field country-container">
+                <label for="surname">Country:</label>
+                <select type="text" id="country" class="select country">
+                    <option>Choose country</option>
+                </select>
+                <div class="error">Please, choose country</div>
+            </div>
+
             <div class="field email-container">
                 <label for="email">Email:</label>
                 <input type="email" id="email" class="input email">
@@ -43,7 +56,8 @@
             </div>
 
             <div>
-                <input type="submit" value="Save">
+                <button type="submit" class="save">Save</button>
+                <button type="button" class="cancel">Cancel</button>
             </div>
         </form>
     </div>

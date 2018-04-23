@@ -19,5 +19,6 @@ export const UPDATE_LIST = 'update-list';
 export const REMOVE_FROM_LIST = 'remove-from-list';
 
 // list -> main
+export const NEW_REQUEST = 'new-request';
 export const UPDATE_REQUEST = 'update-request';
 export const DELETE_REQUEST = 'delete-request';

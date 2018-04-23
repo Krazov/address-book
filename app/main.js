@@ -22,15 +22,13 @@ import './view-controllers/list.js';
 import './view-controllers/manage.js';
 import './view-controllers/delete.js';
 
-// editing item
-// removing item
-// validation
+//import './utils/country-list.util.js';
 
-// local data
+// module data
 const addressBook = readDb(ADDRESS_BOOK, {});
 let lastId = readDb(LAST_ID, {value: 0 }).value;
 
-// restore
+// on restore
 notify(INIT_LIST, addressBook);
 
 // messages: from -> main

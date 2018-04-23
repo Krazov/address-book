@@ -1,8 +1,17 @@
-import { NEW_CONTACT, EDIT_CONTACT, UPDATE_CONTACT } from '../constants/channels.js';
+import {
+    NEW_CONTACT,
+    EDIT_CONTACT,
+    UPDATE_CONTACT ,
+    NEW_REQUEST,
+} from '../constants/channels.js';
 
 import {
-    validateName, validateSurname, validateCountry, validateEmail
+    validateName,
+    validateSurname,
+    validateCountry,
+    validateEmail,
 } from '../../app/utils/validator.util.js';
+
 import { notify, subscribe as observeMessages } from '../helpers/message-bus.helper.js';
 import { compose } from '../utils/fp.util.js';
 
@@ -22,7 +31,15 @@ const $surname = $surnameContainer.querySelector('.surname');
 //const country = document.getElementById('country');
 const $email = $emailContainer.querySelector('.email');
 
+const $cancel = $form.querySelector('.cancel');
+
 // methods
+const toggleDialog = (status) => () => {
+    $dialog.classList.toggle('is-active', status);
+};
+const showDialog = toggleDialog(true);
+const hideDialog = toggleDialog(false);
+
 const getValues = () => ({
     id: $id.value,
     name: $name.value,
@@ -30,18 +47,17 @@ const getValues = () => ({
     email: $email.value,
 });
 
-const closeForm = () => {
-    $dialog.classList.remove('is-active');
+const dismissForm = () => {
+    hideDialog();
     $id.value = '';
     $form.reset();
 };
 
-const validateForm =
-      (name, surname, email) => ({
-          name: validateName(name),
-          surname: validateSurname(surname),
-          email: validateEmail(email),
-      });
+const validateForm = (name, surname, email) => ({
+    name: validateName(name),
+    surname: validateSurname(surname),
+    email: validateEmail(email),
+});
 
 const markErrors = ({ name, surname, email }) => {
     $nameContainer.classList.toggle('has-error', !name);
@@ -55,7 +71,21 @@ const checkValidity = (report) => Object.values(report).every((field) => field =
 
 const allGood = compose(checkValidity, markErrors, validateForm);
 
-// action
+// message bus
+observeMessages(NEW_REQUEST, () => {
+    showDialog();
+});
+
+observeMessages(EDIT_CONTACT, ({ id, name, surname, email }) => {
+    $id.value = id;
+    $name.value = name;
+    $surname.value = surname;
+    $email.value = email;
+
+    showDialog();
+});
+
+// user interactions
 $form.addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -71,14 +101,9 @@ $form.addEventListener('submit', (event) => {
         notify(NEW_CONTACT, { name, surname, email });
     }
 
-    closeForm();
+    dismissForm();
 });
 
-observeMessages(EDIT_CONTACT, ({ id, name, surname, email }) => {
-    $id.value = id;
-    $name.value = name;
-    $surname.value = surname;
-    $email.value = email;
-
-    $dialog.classList.add('is-active');
+$cancel.addEventListener('click', () => {
+    dismissForm();
 });

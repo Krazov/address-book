@@ -3,6 +3,7 @@ import {
     ADD_TO_LIST,
     UPDATE_LIST,
     REMOVE_FROM_LIST,
+    NEW_REQUEST,
     UPDATE_REQUEST,
     DELETE_REQUEST,
 } from '../constants/channels.js';
@@ -11,12 +12,15 @@ import { notify, subscribe as observeMessages } from '../helpers/message-bus.hel
 import { compose } from '../utils/fp.util.js';
 import { itemText } from '../utils/text.util.js';
 import { createItem } from '../utils/dom.item.util.js';
+import countryList from '../utils/country-list.util.js';
 
 // module data
 const items = {};
 
 // elements
-const $list = document.querySelector('.list');
+const $contacts = document.querySelector('.contacts');
+const $new = $contacts.querySelector('.new');
+const $list = $contacts.querySelector('.contacts-list');
 
 // methods
 const addItem = (item) => {
@@ -57,7 +61,11 @@ observeMessages(REMOVE_FROM_LIST, ({ id }) => {
     delete items[id];
 });
 
-// user interaction
+// user interactions
+$new.addEventListener('click', () => {
+    notify(NEW_REQUEST, true);
+});
+
 $list.addEventListener('click', (event) => {
     const { action, contactId } = event.target.customData;
 
