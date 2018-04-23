@@ -17,23 +17,28 @@
         <ul class="list"></ul>
     </div>
 
-    <div class="dialog">
+    <div class="dialog is-active">
         <form class="form">
+            <input type="hidden" class="id" value="">
+
             <div class="field name-container">
                 <label for="name">Name:</label>
                 <input type="text" id="name" class="input name">
                 <div class="error">Invalid name</div>
             </div>
+
             <div class="field surname-container">
                 <label for="surname">Surname:</label>
                 <input type="text" id="surname" class="input surname">
                 <div class="error">Invalid surname</div>
             </div>
+
             <div class="field email-container">
                 <label for="email">Email:</label>
                 <input type="email" id="email" class="input email">
                 <div class="error">Invalid email</div>
             </div>
+
             <div>
                 <input type="submit" value="Save">
             </div>

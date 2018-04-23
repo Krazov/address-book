@@ -1,0 +1,1 @@
+export const itemText = ({name, surname, country = '--', email}) => `${name} ${surname} (${country}), ${email}`;

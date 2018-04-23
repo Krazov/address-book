@@ -1,1 +1,0 @@
-export const parseHTML = (stringTemplate) => document.createRange().createContextualFragment(stringTemplate).children;

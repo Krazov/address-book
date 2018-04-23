@@ -11,3 +11,10 @@ body {
 .field.has-error .error {
     display: block;
 }
+
+.dialog {
+    display: none;
+}
+.dialog.is-active {
+    display: block;
+}
