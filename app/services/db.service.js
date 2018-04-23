@@ -1,5 +1,5 @@
-import { LAST_ID, ADDRESS_BOOK } from '/app/constants/databases.js';
-import { set, get } from '/app/utils/local-storage.util.js';
+import { LAST_ID, ADDRESS_BOOK } from '../constants/databases.js';
+import { set, get } from '../utils/local-storage.util.js';
 
 export const update = ({lastId, addressBook}) => {
     if (lastId) {

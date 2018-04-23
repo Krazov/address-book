@@ -5,12 +5,12 @@ import {
     REMOVE_FROM_LIST,
     UPDATE_REQUEST,
     DELETE_REQUEST,
-} from '/app/constants/channels.js';
+} from '../constants/channels.js';
 
-import { notify, subscribe as observeMessages } from '/app/helpers/message-bus.helper.js';
-import { compose } from '/app/utils/fp.util.js';
-import { itemText } from '/app/utils/text.util.js';
-import { createItem } from '/app/view-controllers/item.js';
+import { notify, subscribe as observeMessages } from '../helpers/message-bus.helper.js';
+import { compose } from '../utils/fp.util.js';
+import { itemText } from '../utils/text.util.js';
+import { createItem } from '../view-controllers/item.js';
 
 // local data
 const items = {};

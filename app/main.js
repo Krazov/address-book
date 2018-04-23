@@ -10,17 +10,17 @@ import {
     UPDATE_REQUEST,
     DELETE_REQUEST,
     DELETE_CONFIRM,
-} from '/app/constants/channels.js';
+} from './constants/channels.js';
 
-import { ADDRESS_BOOK, LAST_ID } from '/app/constants/databases.js';
+import { ADDRESS_BOOK, LAST_ID } from './constants/databases.js';
 
-import { notify, subscribe as observeMessages } from '/app/helpers/message-bus.helper.js';
+import { notify, subscribe as observeMessages } from './helpers/message-bus.helper.js';
 
-import { update as updateDb, read as readDb } from '/app/services/db.service.js';
+import { update as updateDb, read as readDb } from './services/db.service.js';
 
-import '/app/view-controllers/list.js';
-import '/app/view-controllers/manage.js';
-import '/app/view-controllers/delete.js';
+import './view-controllers/list.js';
+import './view-controllers/manage.js';
+import './view-controllers/delete.js';
 
 // editing item
 // removing item

@@ -1,10 +1,10 @@
-import { NEW_CONTACT, EDIT_CONTACT, UPDATE_CONTACT } from '/app/constants/channels.js';
+import { NEW_CONTACT, EDIT_CONTACT, UPDATE_CONTACT } from '../constants/channels.js';
 
 import {
     validateName, validateSurname, validateCountry, validateEmail
 } from '../../app/utils/validator.util.js';
-import { notify, subscribe as observeMessages } from '/app/helpers/message-bus.helper.js';
-import { compose } from '/app/utils/fp.util.js';
+import { notify, subscribe as observeMessages } from '../helpers/message-bus.helper.js';
+import { compose } from '../utils/fp.util.js';
 
 // main element
 const $dialog = document.querySelector('.dialog-manage');

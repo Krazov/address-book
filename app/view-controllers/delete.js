@@ -1,6 +1,6 @@
-import { DELETE_CONTACT, DELETE_CONFIRM } from '/app/constants/channels.js';
-import { notify, subscribe as observeMessages } from '/app/helpers/message-bus.helper.js';
-import { itemText } from '/app/utils/text.util.js';
+import { DELETE_CONTACT, DELETE_CONFIRM } from '../constants/channels.js';
+import { notify, subscribe as observeMessages } from '../helpers/message-bus.helper.js';
+import { itemText } from '../utils/text.util.js';
 
 // data
 let _id = null;

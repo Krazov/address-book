@@ -1,4 +1,4 @@
-import { itemText } from '/app/utils/text.util.js';
+import { itemText } from '../utils/text.util.js';
 
 const createLabel = (name, surname, country, email) =>
     Object.assign(document.createElement('div'), {

@@ -1,4 +1,4 @@
-import { hasProp } from '/app/utils/fp.util.js';
+import { hasProp } from '../utils/fp.util.js';
 
 const subscribers = {};
 
