@@ -3,7 +3,7 @@ import { itemText } from '../utils/text.util.js';
 const createLabel = (name, surname, country, email) =>
     Object.assign(document.createElement('div'), {
         className: 'item-label',
-        textContent: itemText({ name, surname, email }),
+        textContent: itemText({ name, surname, country, email }),
     });
 
 const createButton = (className, textContent, type, id) => {

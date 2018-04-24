@@ -26,8 +26,8 @@ const addItem = (item) => {
     $list.appendChild(item);
 };
 
-const addSingleItem = ({id, name, surname, email}) => {
-    const newItem = createItem({ id, name, surname, email });
+const addSingleItem = ({id, name, surname, country, email}) => {
+    const newItem = createItem({ id, name, surname, country, email });
 
     items[id] = newItem;
 
@@ -52,7 +52,7 @@ observeMessages(INIT_LIST, (addressBook) => {
 observeMessages(ADD_TO_LIST, addSingleItem);
 
 observeMessages(UPDATE_LIST, ({id, name, surname, email }) => {
-    items[id].querySelector('.item-label').textContent = itemText({ name, surname, email });
+    items[id].querySelector('.item-label').textContent = itemText({ name, surname, country, email });
 });
 
 observeMessages(REMOVE_FROM_LIST, ({ id }) => {

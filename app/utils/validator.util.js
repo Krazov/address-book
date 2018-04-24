@@ -1,3 +1,5 @@
+import countryList from './country-list.util.js';
+
 // note:
 // validators could probably be improved,
 // as they allow for names like “@#$-()”,
@@ -21,7 +23,9 @@ export const validateSurname =
         return surname === '' || /[\w]+/.test(nameWithoutDigits);
     };
 
-export const validateCountry = () => true;
+export const validateCountry = (code) => {
+    return countryList.getName(code) !== undefined;
+};
 
 // source: https://www.regular-expressions.info/email.html
 const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;

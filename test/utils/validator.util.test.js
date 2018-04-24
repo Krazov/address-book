@@ -1,5 +1,8 @@
 import {
-    validateName, validateSurname, validateCountry, validateEmail
+    validateName,
+    validateSurname,
+    validateCountry,
+    validateEmail,
 } from '../../app/utils/validator.util.js';
 
 describe('validateName', () => {
@@ -49,7 +52,19 @@ describe('validateSurname', () => {
 });
 
 describe('validateCountry', () => {
-    // later
+    it('should return `true` for a country from the list', () => {
+        const actual = validateCountry('af');
+        const expected = true;
+
+        expect(actual).toBe(expected);
+    });
+
+    it('should return `false` for anything else but country from the list', () => {
+        const actual = validateCountry('HAHA');
+        const expected = false;
+
+        expect(actual).toBe(expected);
+    });
 });
 
 describe('validateEmail', () => {

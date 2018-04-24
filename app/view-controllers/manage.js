@@ -43,10 +43,11 @@ const toggleDialog = (status) => () => {
 const showDialog = toggleDialog(true);
 const hideDialog = toggleDialog(false);
 
-const fillFormFields = ({ id, name, surname, email }) => {
+const fillFormFields = ({ id, name, surname, country, email }) => {
     $id.value = id;
     $name.value = name;
     $surname.value = surname;
+    $country.value = country;
     $email.value = email;
 };
 
@@ -54,6 +55,7 @@ const getValues = () => ({
     id: $id.value,
     name: $name.value,
     surname: $surname.value,
+    country: $country.value,
     email: $email.value,
 });
 
@@ -63,18 +65,24 @@ const dismissForm = () => {
     $form.reset();
 };
 
-const validateForm = (name, surname, email) => ({
+const validateForm = (name, surname, country, email) => ({
     name: validateName(name),
     surname: validateSurname(surname),
+    country: validateCountry(country),
     email: validateEmail(email),
 });
 
-const markErrors = ({ name, surname, email }) => {
-    $nameContainer.classList.toggle('has-error', !name);
-    $surnameContainer.classList.toggle('has-error', !surname);
-    $emailContainer.classList.toggle('has-error', !email);
+const toggleErrorClass = ($field, status) => {
+    $field.classList.toggle('has-error', status);
+};
 
-    return { name, surname, email };
+const markErrors = ({ name, surname, country, email }) => {
+    toggleErrorClass($nameContainer, !name);
+    toggleErrorClass($surnameContainer, !surname);
+    toggleErrorClass($countryContainer, !country);
+    toggleErrorClass($emailContainer, !email);
+
+    return { name, surname, country, email };
 };
 
 const checkValidity = (report) => Object.values(report).every((field) => field == true);
@@ -98,8 +106,8 @@ observeMessages(NEW_REQUEST, () => {
     showDialog();
 });
 
-observeMessages(EDIT_CONTACT, ({ id, name, surname, email }) => {
-    fillFormFields({ id, name, surname, email });
+observeMessages(EDIT_CONTACT, ({ id, name, surname, country, email }) => {
+    fillFormFields({ id, name, surname, country, email });
     showDialog();
 });
 
@@ -107,16 +115,16 @@ observeMessages(EDIT_CONTACT, ({ id, name, surname, email }) => {
 $form.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const { id, name, surname, email } = getValues();
+    const { id, name, surname, country, email } = getValues();
 
-    if (!allGood(name, surname, email)) {
+    if (!allGood(name, surname, country, email)) {
         return;
     }
 
     if (id) {
-        notify(UPDATE_CONTACT, { id, name, surname, email });
+        notify(UPDATE_CONTACT, { id, name, surname, country, email });
     } else {
-        notify(NEW_CONTACT, { name, surname, email });
+        notify(NEW_CONTACT, { name, surname, country, email });
     }
 
     dismissForm();

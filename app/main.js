@@ -32,13 +32,14 @@ let lastId = readDb(LAST_ID, {value: 0 }).value;
 notify(INIT_LIST, addressBook);
 
 // messages: from -> main
-observeMessages(NEW_CONTACT, ({name, surname, email}) => {
+observeMessages(NEW_CONTACT, ({name, surname, country, email}) => {
     lastId += 1;
 
     const newContact = {
         id: lastId,
         name,
         surname,
+        country,
         email,
     };
 
@@ -49,9 +50,9 @@ observeMessages(NEW_CONTACT, ({name, surname, email}) => {
 });
 
 observeMessages(UPDATE_CONTACT, ({id, name, surname, email}) => {
-    addressBook[id] = { id, name, surname, email };
+    addressBook[id] = { id, name, surname, country, email };
     updateDb({ addressBook });
-    notify(UPDATE_LIST, { id, name, surname, email });
+    notify(UPDATE_LIST, { id, name, surname, country, email });
 });
 
 // messages: delete -> main
