@@ -17,7 +17,7 @@ module.exports = function (grunt) {
                         debug: true
                     }
                 }
-            }
+            },
         },
 
         uglify: {
@@ -26,8 +26,37 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: {
-                    'bundled/app.min.js': 'bundled/app.js'
+                    'bundled/app.min.js': 'bundled/app.js',
                 }
+            },
+        },
+
+        less: {
+            production: {
+                files: {
+                    'css/main.css': 'app/main.less'
+                }
+            },
+        },
+
+        cssmin: {
+            options: {
+                sourceMap: true,
+//                report: 'gzip',
+                level: 2,
+                sourceMapInlineSources: true,
+            },
+            target: {
+                files: {
+                    'css/main.min.css': 'css/main.css'
+                },
+            },
+        },
+
+        watch: {
+            less: {
+                files: 'app/**/*.less',
+                tasks: ['less'],
             }
         },
     });
@@ -35,5 +64,7 @@ module.exports = function (grunt) {
     grunt.registerTask('default', [
         'browserify:bundle',
         'uglify',
+        'less:production',
+        'cssmin',
     ]);
 };
