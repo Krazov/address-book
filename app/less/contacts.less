@@ -1,0 +1,38 @@
+.contacts {
+    margin: auto;
+    max-width: @contacts-width;
+    padding: 0 @padding;
+
+    &-buttons {
+        margin: (@padding * 2) 0 @padding;
+        text-align: right;
+    }
+
+    &-list {
+        border-top: 1px solid @contacts-line;
+    }
+
+    &-item {
+        align-items: center;
+        border-bottom: 1px solid @contacts-line;
+        display: flex;
+        line-height: 1.5;
+        justify-content: space-between;
+        padding: @padding 0;
+
+        &-name {
+            color: @contacts-name-color;
+            font-size: @contacts-name-font;
+        }
+
+        &-country {
+            color: @contacts-country-color;
+            font-size: @contacts-country-font;
+        }
+
+        &-email {
+            color: @contacts-email-color;
+            font-size: @contacts-email-font;
+        }
+    }
+}
