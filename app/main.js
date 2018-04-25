@@ -1,3 +1,5 @@
+'use strict';
+
 import {
     EDIT_CONTACT,
     NEW_CONTACT,
@@ -18,20 +20,40 @@ import { notify, subscribe as observeMessages } from './helpers/message-bus.help
 
 import { update as updateDb, read as readDb } from './services/db.service.js';
 
-import './view-controllers/list.js';
-import './view-controllers/manage.js';
-import './view-controllers/delete.js';
+import initList from './view-controllers/list/controller.js';
+import initFormDialog from './view-controllers/form-dialog/controller.js';
+import initDeleteDialog from './view-controllers/delete-dialog/controller.js';
 
-//import './utils/country-list.util.js';
+import { appendAll } from './utils/dom.general.util.js';
 
 // module data
 const addressBook = readDb(ADDRESS_BOOK, {});
 let lastId = readDb(LAST_ID, {value: 0 }).value;
 
-// on restore
-notify(INIT_LIST, addressBook);
+// initialize view controllers, append them, and initialize list contents
+Promise
+    .all([
+        initList(),
+        initFormDialog(),
+        initDeleteDialog(),
+    ])
+    .then((everything) => everything.reduce(
+        (flatArray, $view) => {
+            flatArray.push($view);
+            return flatArray;
+        },
+        []
+    ))
+    .then((views) => {
+        const $main = document.querySelector('.jsMain');
 
-// messages: from -> main
+        appendAll($main, views);
+    })
+    .then(() => {
+        notify(INIT_LIST, addressBook);
+    });
+
+// messages: form -> main
 observeMessages(NEW_CONTACT, ({name, surname, country, email}) => {
     lastId += 1;
 
@@ -49,7 +71,7 @@ observeMessages(NEW_CONTACT, ({name, surname, country, email}) => {
     notify(ADD_TO_LIST, newContact);
 });
 
-observeMessages(UPDATE_CONTACT, ({id, name, surname, email}) => {
+observeMessages(UPDATE_CONTACT, ({id, name, surname, country, email}) => {
     addressBook[id] = { id, name, surname, country, email };
     updateDb({ addressBook });
     notify(UPDATE_LIST, { id, name, surname, country, email });

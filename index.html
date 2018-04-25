@@ -1,83 +1,16 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Address book</title>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,700italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="./css/main.css">
+        <script src="./app/main.js" type="module" defer></script>
+    <!--    <script src="./bundled/app.js" type="module" defer></script>-->
+    </head>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Address book</title>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,700italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="./css/main.css">
-    <script src="./app/main.js" type="module" defer></script>
-<!--    <script src="./bundled/app.js" type="module" defer></script>-->
-</head>
-
-<body>
-    <div class="main">
-        <h1>Address book</h1>
-
-        <div class="contacts">
-            <div class="contacts-buttons">
-                <button class="contacts-button new">New contact</button>
-            </div>
-            <ul class="contacts-list"></ul>
-        </div>
-    </div>
-
-    <div class="dialog dialog-manage">
-        <div class="dialog-title">Manage contact</div>
-
-        <form class="form">
-            <input type="hidden" class="id" value="">
-
-            <div class="field name-container">
-                <label for="name">Name:</label>
-                <input type="text" id="name" class="input name">
-                <div class="error">Invalid name</div>
-            </div>
-
-            <div class="field surname-container">
-                <label for="surname">Surname:</label>
-                <input type="text" id="surname" class="input surname">
-                <div class="error">Invalid surname</div>
-            </div>
-
-            <div class="field country-container">
-                <label for="surname">Country:</label>
-                <select type="text" id="country" class="select country">
-                    <option>Choose country</option>
-                </select>
-                <div class="error">Please, choose country</div>
-            </div>
-
-            <div class="field email-container">
-                <label for="email">Email:</label>
-                <input type="text" id="email" class="input email">
-                <div class="error">Invalid email</div>
-            </div>
-
-            <div>
-                <button type="submit" class="save">Save</button>
-                <button type="button" class="cancel">Cancel</button>
-            </div>
-        </form>
-    </div>
-
-    <div class="dialog dialog-delete">
-        <div class="dialog-title">Removing contact</div>
-
-        <form class="form">
-            <input type="hidden" class="id" value="">
-
-            <div class="question">Do you want to remove this contact?</div>
-
-            <div class="contact-details"></div>
-
-            <div class="options">
-                <button class="form-anwer form-yes">Yes, remove it</button>
-                <button class="form-anwer form-no">Cancel</button>
-            </div>
-        </form>
-    </div>
-</body>
-
+    <body>
+        <div class="jsMain"></div>
+    </body>
 </html>
