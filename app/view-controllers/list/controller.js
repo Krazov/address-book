@@ -12,12 +12,16 @@ import { notify, subscribe as observeMessages } from '../../helpers/message-bus.
 import { compose } from '../../utils/fp.util.js';
 import getTemplate from '../../utils/dom.template.util.js';
 import { itemText } from '../../utils/text.util.js';
-import { createItem } from '../../utils/dom.item.util.js';
+import itemCreator from '../../utils/dom.item.util.js';
 
 // init function
 export default () =>
-    getTemplate('/app/view-controllers/list/view.html')
-        .then(($view) => {
+    Promise
+        .all([
+            getTemplate('/app/view-controllers/list/view.html'),
+            getTemplate('/app/view-controllers/list/item.html'),
+        ])
+        .then(([$view, $item]) => {
             // module data
             const items = {};
 
@@ -27,9 +31,11 @@ export default () =>
             const $list = $contacts.querySelector('.jsContactsList');
 
             // methods ________________________________________________________________________________________________
-            const addItem = (item) => {
-                $list.appendChild(item);
+            const addItem = ($item) => {
+                $list.appendChild($item);
             };
+
+            const createItem = itemCreator($item.children[0]);
 
             const addSingleItem = ({id, name, surname, country, email}) => {
                 const newItem = createItem({ id, name, surname, country, email });

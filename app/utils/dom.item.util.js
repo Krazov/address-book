@@ -1,37 +1,21 @@
-import { itemText } from '../utils/text.util.js';
+import countryList from './country-list.util.js';
 
-const createLabel = (name, surname, country, email) =>
-    Object.assign(document.createElement('div'), {
-        className: 'item-label',
-        textContent: itemText({ name, surname, country, email }),
-    });
+export default ($template) => ({ id, name, surname, country, email }) => {
+    const $item = $template.cloneNode(true);
 
-const createButton = (className, textContent, type, id) => {
-    const $button = document.createElement('button');
+    $item.querySelector('.jsName').textContent = `${name} ${surname}`;
+    $item.querySelector('.jsCountry').textContent = `${country && countryList.getName(country)}`;
+    $item.querySelector('.jsEmail').textContent = `${email}`;
 
-    $button.customData = {
+    $item.querySelector('.jsEdit').customData = {
         contactId: id,
-        action: type,
+        action: 'edit',
     };
 
-    $button.className = className;
-    $button.textContent = textContent;
+    $item.querySelector('.jsDelete').customData = {
+        contactId: id,
+        action: 'delete',
+    };
 
-    return $button;
-};
-
-const createEditButton = (id) => createButton('itemEdit', 'Edit', 'edit', id);
-
-const createDeleteButton = (id) => createButton('itemDelete', 'Delete', 'delete', id);
-
-export const createItem = ({ id, name, surname, country, email }) => {
-    const li = document.createElement('li');
-
-    li.className = 'item';
-
-    li.appendChild(createLabel(name, surname, country, email));
-    li.appendChild(createEditButton(id));
-    li.appendChild(createDeleteButton(id));
-
-    return li;
+    return $item;
 };
