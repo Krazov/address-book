@@ -2,6 +2,8 @@ import { hasProp } from '../utils/fp.util.js';
 
 const subscribers = {};
 
+const channelExists = (channel) => hasProp(subscribers, channel);
+
 export const subscribe = (channel, fn) => {
     if (!channelExists(channel)) {
         subscribers[channel] = [];
@@ -25,7 +27,3 @@ export const notify = (channel, message) => {
         })
     }
 };
-
-function channelExists(channel) {
-    return hasProp(subscribers, channel);
-}
