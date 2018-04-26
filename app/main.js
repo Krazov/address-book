@@ -1,5 +1,3 @@
-'use strict';
-
 import {
     EDIT_CONTACT,
     NEW_CONTACT,
@@ -23,6 +21,7 @@ import { update as updateDb, read as readDb } from './services/db.service.js';
 import initList from './view-controllers/list/controller.js';
 import initFormDialog from './view-controllers/form-dialog/controller.js';
 import initDeleteDialog from './view-controllers/delete-dialog/controller.js';
+import initOverlay from './view-controllers/overlay/controller.js';
 
 import { appendAll } from './utils/dom.general.util.js';
 
@@ -36,6 +35,7 @@ Promise
         initList(),
         initFormDialog(),
         initDeleteDialog(),
+        initOverlay(),
     ])
     .then((everything) => everything.reduce(
         (flatArray, $view) => {

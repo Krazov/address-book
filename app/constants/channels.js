@@ -22,3 +22,6 @@ export const REMOVE_FROM_LIST = 'remove-from-list';
 export const NEW_REQUEST = 'new-request';
 export const UPDATE_REQUEST = 'update-request';
 export const DELETE_REQUEST = 'delete-request';
+
+// overlay -> others
+export const OVERLAY_CLICKED = 'overlay-clicked';
