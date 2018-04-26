@@ -129,17 +129,47 @@ body {
   background: white;
   color: black;
   font-family: 'Open Sans', Calibri, sans-serif;
+  user-select: none;
+}
+.button-theme,
+.contacts-button,
+.contacts-item-button,
+.form-button {
+  border: 1px solid black;
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 20px;
+  padding: 10px;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+}
+.button-theme.is-positive,
+.contacts-button.is-positive,
+.contacts-item-button.is-positive,
+.form-button.is-positive {
+  background-color: green;
+}
+.button-theme.is-dangerous,
+.contacts-button.is-dangerous,
+.contacts-item-button.is-dangerous,
+.form-button.is-dangerous {
+  background-color: red;
+}
+.button-theme.is-neutral,
+.contacts-button.is-neutral,
+.contacts-item-button.is-neutral,
+.form-button.is-neutral {
+  background-color: dimgray;
 }
 .address-book-header {
   background-color: teal;
   color: white;
   font-size: 32px;
-  font-variant: small-caps;
   letter-spacing: 0.5em;
   padding: 40px;
   text-align: center;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-  text-transform: lowercase;
+  text-transform: uppercase;
 }
 .contacts {
   margin: auto;
@@ -161,6 +191,11 @@ body {
   justify-content: space-between;
   padding: 20px 0;
 }
+@media only screen and (max-width: 639px) {
+  .contacts-item {
+    display: block;
+  }
+}
 .contacts-item-name {
   color: black;
   font-size: 24px;
@@ -173,15 +208,151 @@ body {
   color: darkcyan;
   font-size: 20px;
 }
+@media only screen and (max-width: 639px) {
+  .contacts-item-name,
+  .contacts-item-country,
+  .contacts-item-email {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+@media only screen and (max-width: 639px) {
+  .contacts-item-buttons {
+    margin-top: 10px;
+  }
+}
 .dialog {
-  display: none;
+  background-color: white;
+  border: 0.5px solid darkcyan;
+  font-size: 12px;
+  left: 50%;
+  opacity: 0;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 250ms ease;
+  width: 640px;
+  z-index: -1;
+}
+@media only screen and (max-width: 639px) {
+  .dialog {
+    width: 100vw;
+  }
 }
 .dialog.is-active {
-  display: block;
+  opacity: 1;
+  transition: opacity 500ms ease;
+  z-index: 2;
 }
-.error {
+.dialog-title {
+  letter-spacing: 0.5ch;
+  padding: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.dialog-body {
+  padding: 40px;
+}
+.form-container {
+  margin-bottom: 20px;
+}
+.form-row {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+@media only screen and (max-width: 639px) {
+  .form-row {
+    display: block;
+  }
+}
+.form-label {
+  font-size: 20px;
+}
+@media only screen and (max-width: 639px) {
+  .form-label {
+    display: block;
+  }
+}
+.form-input,
+.form-select {
+  border: 0.5px solid black;
+  box-sizing: border-box;
+  font-size: 20px;
+  outline: 0 none;
+  padding: 10px;
+  transition: border-color 250ms ease;
+  width: 384px;
+}
+.form-input:hover,
+.form-select:hover,
+.form-input:active,
+.form-select:active {
+  outline: inherit;
+}
+@media only screen and (max-width: 639px) {
+  .form-input,
+  .form-select {
+    width: 100%;
+  }
+}
+.has-error .form-input,
+.has-error .form-select {
+  border-color: red;
+}
+.form-error {
+  font-size: 12.8px;
+  line-height: 1.5;
+}
+.form-error {
+  color: red;
+  opacity: 0;
+  padding-left: calc(100% - 344px);
+  transition: opacity 250ms ease, padding-left 250ms ease;
+}
+@media only screen and (max-width: 639px) {
+  .form-error {
+    padding-left: 20px;
+  }
+}
+.has-error .form-error {
+  opacity: 1;
+  padding-left: calc(100% - 384px);
+}
+@media only screen and (max-width: 639px) {
+  .has-error .form-error {
+    padding-left: 0;
+  }
+}
+.form-submit {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+}
+.form-question,
+.form-details {
+  line-height: 1.5;
+  text-align: center;
+}
+.form-question {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.form-details {
+  font-size: 24px;
+  margin-bottom: 40px;
+}
+.overlay {
+  background-color: rgba(0, 0, 0, 0.25);
+  bottom: 0;
   display: none;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1;
 }
-.field.has-error .error {
+.is-active ~ .overlay {
   display: block;
 }
