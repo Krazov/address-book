@@ -3,6 +3,7 @@ import {
     UPDATE_REQUEST,
     DELETE_CONTACT,
     DELETE_CONFIRM,
+    OVERLAY_CLICKED,
 } from '../../constants/channels.js';
 
 import getTemplate from '../../utils/dom.template.util.js';
@@ -51,8 +52,10 @@ export default () =>
                 updateDetails(id, contact);
                 showDialog();
             });
+
             observeMessages(NEW_REQUEST, hideDialog);
             observeMessages(UPDATE_REQUEST, hideDialog);
+            observeMessages(OVERLAY_CLICKED, hideDialog);
 
             // user interactions ______________________________________________________________________________________
             $yes.addEventListener('click', (event) => {
