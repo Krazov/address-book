@@ -8,5 +8,13 @@ export const compose =
         );
     };
 
+export const pipe =
+    (...functions) => (...initial) => {
+        return functions.reduce(
+            (value, fn, index) => index === 0 ? fn(...value) : fn(value),
+            initial
+        );
+    };
+
 export const hasProp =
     (object, prop) => object.hasOwnProperty(prop);

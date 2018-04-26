@@ -3,6 +3,8 @@ import {
     EDIT_CONTACT,
     UPDATE_CONTACT ,
     NEW_REQUEST,
+    UPDATE_REQUEST,
+    DELETE_REQUEST,
 } from '../../constants/channels.js';
 
 import {
@@ -14,7 +16,7 @@ import {
 
 import { notify, subscribe as observeMessages } from '../../helpers/message-bus.helper.js';
 import getTemplate from '../../utils/dom.template.util.js';
-import { compose } from '../../utils/fp.util.js';
+import { compose, pipe } from '../../utils/fp.util.js';
 import createOption from '../../utils/dom.option.util.js';
 import countryList from '../../utils/country-list.util.js';
 
@@ -94,6 +96,8 @@ export default () =>
 
             const allGood = compose(checkValidity, markErrors, validateForm);
 
+            const restartForm = pipe(dismissForm, showDialog);
+
             // on load ________________________________________________________________________________________________
             {
                 const countries = countryList.getCodeList();
@@ -107,9 +111,8 @@ export default () =>
             }
 
             // message bus ____________________________________________________________________________________________
-            observeMessages(NEW_REQUEST, () => {
-                showDialog();
-            });
+            observeMessages(NEW_REQUEST, restartForm);
+            observeMessages(DELETE_REQUEST, dismissForm);
 
             observeMessages(EDIT_CONTACT, ({ id, name, surname, country, email }) => {
                 fillFormFields({ id, name, surname, country, email });

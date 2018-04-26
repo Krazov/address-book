@@ -1,4 +1,6 @@
 import {
+    NEW_REQUEST,
+    UPDATE_REQUEST,
     DELETE_CONTACT,
     DELETE_CONFIRM,
 } from '../../constants/channels.js';
@@ -49,6 +51,8 @@ export default () =>
                 updateDetails(id, contact);
                 showDialog();
             });
+            observeMessages(NEW_REQUEST, hideDialog);
+            observeMessages(UPDATE_REQUEST, hideDialog);
 
             // user interactions ______________________________________________________________________________________
             $yes.addEventListener('click', (event) => {
