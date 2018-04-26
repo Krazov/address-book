@@ -8,6 +8,10 @@
         text-align: right;
     }
 
+    &-button {
+        &:extend(.button-theme all);
+    }
+
     &-list {
         border-top: 1px solid @contacts-line;
     }
@@ -19,6 +23,10 @@
         line-height: 1.5;
         justify-content: space-between;
         padding: @padding 0;
+
+        @media @mobile {
+            display: block;
+        }
 
         &-name {
             color: @contacts-name-color;
@@ -33,6 +41,26 @@
         &-email {
             color: @contacts-email-color;
             font-size: @contacts-email-font;
+        }
+
+        &-name,
+        &-country,
+        &-email {
+            @media @mobile {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+
+        &-buttons {
+            @media @mobile {
+                margin-top: @padding / 2;
+            }
+        }
+
+        &-button {
+            &:extend(.button-theme all);
         }
     }
 }

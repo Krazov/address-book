@@ -1,7 +1,82 @@
-.error {
-    display: none;
+.form {
+    &-container {
+        margin-bottom: @padding;
+    }
 
-    .field.has-error & {
-        display: block;
+    &-row {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+
+        @media @mobile {
+            display: block;
+        }
+    }
+
+    &-label {
+        font-size: @form-font-label;
+
+        @media @mobile {
+            display: block;
+        }
+    }
+
+    &-input,
+    &-select {
+        border: 0.5px solid black;
+        box-sizing: border-box;
+        font-size: @form-font-input;
+        outline: 0 none;
+        padding: @padding / 2;
+        transition: border-color 250ms ease;
+        width: @dialog-width * 0.6;
+
+        &:hover,
+        &:active {
+            outline: inherit;
+        }
+
+        @media @mobile {
+            width: 100%;
+        }
+
+        .has-error & {
+            border-color: @form-error;
+        }
+    }
+
+    &-error {
+        font-size: @form-font-error;
+        line-height: 1.5;
+    }
+
+    &-error {
+        color: @form-error;
+        opacity: 0;
+        padding-left: calc(100% ~"-" @dialog-width * 0.6 - @padding * 2);
+        transition: opacity 250ms ease, padding-left 250ms ease;
+
+        @media @mobile {
+            padding-left: @padding;
+        }
+
+        .has-error & {
+            opacity: 1;
+            padding-left: calc(100% ~"-" @dialog-width * 0.6);
+
+            @media @mobile {
+                padding-left: 0;
+            }
+        }
+    }
+
+    &-submit {
+        display: flex;
+        justify-content: space-evenly;
+        text-align: center;
+    }
+
+    &-button {
+        &:extend(.button-theme all);
     }
 }

@@ -2,4 +2,25 @@ body {
     background: @color-bg;
     color: @color-text;
     font-family: @font-family;
+    user-select: none;
+}
+
+.button-theme {
+    border: 1px solid @button-border;
+    color: @button-text;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: @button-font;
+    padding: @padding / 2;
+    text-shadow: @button-shadow;
+
+    &.is-positive {
+        background-color: @button-positive;
+    }
+    &.is-dangerous {
+        background-color: @button-dangerous;
+    }
+    &.is-neutral {
+        background-color: @button-neutral;
+    }
 }

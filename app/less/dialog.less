@@ -1,7 +1,34 @@
 .dialog {
-    display: none;
+    background-color: @dialog-background;
+    border: 0.5px solid @dialog-border;
+    font-size: @dialog-font-title;
+    left: 50%;
+    opacity: 0;
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 250ms ease;
+    width: @dialog-width;
+    z-index: -1;
+
+    @media @mobile {
+        width: 100vw;
+    }
 
     &.is-active {
-        display: block;
+        opacity: 1;
+        transition: opacity 500ms ease;
+        z-index: @layer-dialog;
+    }
+
+    &-title {
+        letter-spacing: 0.5ch;
+        padding: @padding / 2;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    &-body {
+        padding: @padding * 2;
     }
 }
