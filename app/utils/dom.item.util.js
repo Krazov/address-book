@@ -1,6 +1,6 @@
 import countryList from './country-list.util.js';
 
-export default ($template) => ({ id, name, surname, country, email }) => {
+export const itemCreator = ($template) => ({ id, name, surname, country, email }) => {
     const $item = $template.cloneNode(true);
 
     $item.querySelector('.jsName').textContent = `${name} ${surname}`;
@@ -18,4 +18,10 @@ export default ($template) => ({ id, name, surname, country, email }) => {
     };
 
     return $item;
+};
+
+export const refreshItem = ($item, { name, surname, country, email }) => {
+    $item.querySelector('.jsName').textContent = `${name} ${surname}`;
+    $item.querySelector('.jsCountry').textContent = `${country && countryList.getName(country)}`;
+    $item.querySelector('.jsEmail').textContent = `${email}`;
 };

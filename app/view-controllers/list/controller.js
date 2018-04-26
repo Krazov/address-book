@@ -12,7 +12,7 @@ import { notify, subscribe as observeMessages } from '../../helpers/message-bus.
 import { compose } from '../../utils/fp.util.js';
 import getTemplate from '../../utils/dom.template.util.js';
 import { itemText } from '../../utils/text.util.js';
-import itemCreator from '../../utils/dom.item.util.js';
+import { itemCreator, refreshItem } from '../../utils/dom.item.util.js';
 
 // init function
 export default () =>
@@ -63,7 +63,7 @@ export default () =>
             observeMessages(ADD_TO_LIST, addSingleItem);
 
             observeMessages(UPDATE_LIST, ({id, name, surname, country, email }) => {
-                items[id].querySelector('.item-label').textContent = itemText({ name, surname, country, email });
+                refreshItem(items[id], { name, surname, country, email });
             });
 
             observeMessages(REMOVE_FROM_LIST, ({ id }) => {
@@ -77,7 +77,7 @@ export default () =>
             });
 
             $list.addEventListener('click', (event) => {
-                const { action, contactId } = event.target.customData;
+                const { customData: { action, contactId } = {} } = event.target;
 
                 switch (action) {
                 case 'edit':
