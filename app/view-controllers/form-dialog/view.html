@@ -1,38 +1,48 @@
 <div class="dialog dialog-form jsDialog">
-    <div class="dialog-title">Manage contact</div>
+    <div class="dialog-title jsTitle">Manage contact</div>
 
-    <form class="form jsForm">
-        <input type="hidden" class="id jsId" value="">
+    <div class="dialog-body">
+        <form class="form jsForm">
+            <input type="hidden" class="id jsId" value="">
 
-        <div class="field name-container jsNameContainer">
-            <label for="name">Name:</label>
-            <input type="text" id="name" class="input name jsName" autocomplete="name">
-            <div class="error">Invalid name</div>
-        </div>
+            <div class="form-container name-container jsNameContainer">
+                <div class="form-row">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" id="name" class="form-input jsName" autocomplete="name">
+                </div>
+                <div class="form-error">Invalid name</div>
+            </div>
 
-        <div class="field surname-container jsSurnameContainer">
-            <label for="surname">Surname:</label>
-            <input type="text" id="surname" class="input surname jsSurname" autocomplete="given-name">
-            <div class="error">Invalid surname</div>
-        </div>
+            <div class="form-container surname-container jsSurnameContainer">
+                <div class="form-row">
+                    <label for="surname" class="form-label">Surname:</label>
+                    <input type="text" id="surname" class="form-input jsSurname" autocomplete="given-name">
+                </div>
+                <div class="form-error">Invalid surname</div>
+            </div>
 
-        <div class="field country-container jsCountryContainer">
-            <label for="surname">Country:</label>
-            <select type="text" id="country" class="select country jsCountry" autocomplete="country">
-                <option>Choose country</option>
-            </select>
-            <div class="error">Please, choose country</div>
-        </div>
+            <div class="form-container country-container jsCountryContainer">
+                <div class="form-row" class="form-label">
+                    <label for="surname" class="form-label">Country:</label>
+                    <select type="text" id="country" class="form-select jsCountry" autocomplete="country">
+                        <option>Choose country</option>
+                    </select>
+                </div>
+                <div class="form-error">Please choose country</div>
+            </div>
 
-        <div class="field email-container jsEmailContainer">
-            <label for="email">Email:</label>
-            <input type="text" id="email" class="input email jsEmail" autocomplete="email">
-            <div class="error">Invalid email</div>
-        </div>
+            <div class="form-container email-container jsEmailContainer">
+                <div class="form-row" class="form-label">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="text" id="email" class="form-input jsEmail" autocomplete="email">
+                </div>
+                <div class="form-error">Invalid email</div>
+            </div>
 
-        <div>
-            <button type="submit" class="save">Save</button>
-            <button type="button" class="cancel jsCancel">Cancel</button>
-        </div>
-    </form>
+            <div class="form-submit">
+                <button type="submit" class="form-button is-positive save">Save</button>
+                <button type="button" class="form-button is-neutral cancel jsCancel">Cancel</button>
+            </div>
+        </form>
+    </div>
 </div>

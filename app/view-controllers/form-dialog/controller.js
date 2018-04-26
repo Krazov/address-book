@@ -5,6 +5,7 @@ import {
     NEW_REQUEST,
     UPDATE_REQUEST,
     DELETE_REQUEST,
+    OVERLAY_CLICKED,
 } from '../../constants/channels.js';
 
 import {
@@ -26,6 +27,7 @@ export default () =>
         .then(($view) => {
             // main element
             const $dialog = $view.querySelector('.jsDialog');
+            const $title = $dialog.querySelector('.jsTitle');
             const $form = $dialog.querySelector('.jsForm');
 
             // containers
@@ -49,6 +51,12 @@ export default () =>
             };
             const showDialog = toggleDialog(true);
             const hideDialog = toggleDialog(false);
+
+            const setTitle = (title) => () => {
+                $title.textContent = title;
+            }
+            const setTitleForNew = setTitle('New contact');
+            const setTitleForEdit = setTitle('Edit contact');
 
             const fillFormFields = ({ id, name, surname, country, email }) => {
                 $id.value = id;
@@ -92,11 +100,20 @@ export default () =>
                 return { name, surname, country, email };
             };
 
+            const markGood = () => markErrors({
+                name: true,
+                surname: true,
+                country: true,
+                email: true
+            });
+
             const checkValidity = (report) => Object.values(report).every((field) => field == true);
 
             const allGood = compose(checkValidity, markErrors, validateForm);
 
-            const restartForm = pipe(dismissForm, showDialog);
+            const restartForm = pipe(dismissForm, setTitleForNew, showDialog);
+
+            const startEditingForm = pipe(fillFormFields, markGood, setTitleForEdit, showDialog);
 
             // on load ________________________________________________________________________________________________
             {
@@ -113,11 +130,8 @@ export default () =>
             // message bus ____________________________________________________________________________________________
             observeMessages(NEW_REQUEST, restartForm);
             observeMessages(DELETE_REQUEST, dismissForm);
-
-            observeMessages(EDIT_CONTACT, ({ id, name, surname, country, email }) => {
-                fillFormFields({ id, name, surname, country, email });
-                showDialog();
-            });
+            observeMessages(OVERLAY_CLICKED, dismissForm);
+            observeMessages(EDIT_CONTACT, startEditingForm);
 
             // user interactions ______________________________________________________________________________________
             $form.addEventListener('submit', (event) => {
