@@ -25,7 +25,7 @@
     "uglify": "^0.1.5"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest --env=node --colors"
   },
   "repository": {
     "type": "git",
