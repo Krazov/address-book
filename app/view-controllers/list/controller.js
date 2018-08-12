@@ -9,9 +9,7 @@ import {
 } from '../../constants/channels.js';
 
 import { notify, subscribe as observeMessages } from '../../helpers/message-bus.helper.js';
-import { compose } from '../../utils/fp.util.js';
 import getTemplate from '../../utils/dom.template.util.js';
-import { itemText } from '../../utils/text.util.js';
 import { itemCreator, refreshItem } from '../../utils/dom.item.util.js';
 
 // init function
@@ -43,7 +41,7 @@ export default () =>
                 items[id] = newItem;
 
                 addItem(newItem);
-            }
+            };
 
             const updateItem = (id) => {
                 notify(UPDATE_REQUEST, { id });
