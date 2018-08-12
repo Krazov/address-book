@@ -308,7 +308,7 @@ body {
 .form-error {
   color: red;
   opacity: 0;
-  padding-left: calc(100% - 344px);
+  padding-left: calc(100% - 640px * 0.6 - 20px * 2);
   transition: opacity 250ms ease, padding-left 250ms ease;
 }
 @media only screen and (max-width: 639px) {
@@ -318,7 +318,7 @@ body {
 }
 .has-error .form-error {
   opacity: 1;
-  padding-left: calc(100% - 384px);
+  padding-left: calc(100% - 640px * 0.6);
 }
 @media only screen and (max-width: 639px) {
   .has-error .form-error {
@@ -356,3 +356,4 @@ body {
 .is-active ~ .overlay {
   display: block;
 }
+
